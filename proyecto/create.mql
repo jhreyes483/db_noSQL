@@ -1,0 +1,95 @@
+use proyect_uni
+db.cursos.find()
+
+// referenciar
+db.cursos.insertOne({
+    _id:ObjectId(),
+    titulo:"MongoDB",
+    desc:"Este curso es de los conceptos básicos y esenciales",
+    creditos:30,
+    horas:24,
+    likes:0
+})
+
+db.cursos.updateOne(
+    { _id:ObjectId("65620841e1d829e1881b6b5c")},
+    { $set:{titulo:"Laravel"}}
+)
+
+db.palabra.insert([
+    {palabra:"mongo",idCurso:ObjectId("65620841e1d829e1881b6b5c")},
+    {palabra:"nosql", idCurso:ObjectId("65620841e1d829e1881b6b5c")},
+    {palabra: "bases de datos", idCurso:ObjectId("65620841e1d829e1881b6b5c")},
+    {palabra: "BigData", idCurso:ObjectId("65620841e1d829e1881b6b5c")},
+    {palabra: "Información", idCurso:ObjectId("65620841e1d829e1881b6b5c")}
+])  
+db.palabra.find()
+
+db.comentarios.insert(
+    [
+        {
+            _id:ObjectId(),
+            usuario:"Camilo",
+            mensaje:"Este curso lo estaba esperando",
+            fecha_hora:new Date(),
+            like:1,
+            idCurso:ObjectId("65620841e1d829e1881b6b5c")
+        },
+                {
+            _id:ObjectId(),
+            usuario:"Andres",
+            mensaje:"Este curso lo esta bueno",
+            fecha_hora:new Date(),
+            like:1,
+            idCurso:ObjectId("65620841e1d829e1881b6b5c")
+        },
+                {
+            _id:ObjectId(),
+            usuario:"Maria",
+            mensaje:"Buen curso",
+            fecha_hora:new Date(),
+            like:1,
+            idCurso:ObjectId("65620841e1d829e1881b6b5c")
+        }
+    ]
+)
+db.comentarios.find()
+
+
+// Embebido 
+
+db.cursos.insertOne({
+    _id:ObjectId(),
+    titulo:"MongoDB",
+    desc:"Este curso es de los conceptos básicos y esenciales",
+    creditos:30,
+    horas:24,
+    likes:0,
+    palabras:['mongo','noSql','base de datos','BigData','informacion'],
+    comentarios:[
+           {
+            _id:ObjectId(),
+            usuario:"Camilo",
+            mensaje:"Este curso lo estaba esperando",
+            fecha_hora:new Date(),
+            like:1
+        },
+                {
+            _id:ObjectId(),
+            usuario:"Andres",
+            mensaje:"Este curso lo esta bueno",
+            fecha_hora:new Date(),
+            like:1
+        },
+                {
+            _id:ObjectId(),
+            usuario:"Maria",
+            mensaje:"Buen curso",
+            fecha_hora:new Date(),
+            like:1
+        }
+        ]
+})
+
+
+
