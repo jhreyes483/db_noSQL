@@ -1,0 +1,37 @@
+
+db.usuarios.insertOne({
+    "_id":12345,
+    "nombre":"el pedro",
+    "edad":20
+})
+   
+db.correos.insertMany([
+    {
+       "correo":"pedro@gmail.com",
+       "usuario_id":12345
+    },
+    {
+       "correo":"pedro2@gmail.com",
+       "usuario_id":12345
+    },
+    {
+    "correo":"pedro3@gmail.com",
+    "usuario_id":12345
+    }
+])
+        
+db.correos.find()
+        
+/***************** joins  REFERENCES **********************/        
+db.getCollection("usuarios").aggregate({
+    $lookup:{
+        from:"correos",
+        localField:"_id",
+        foreignField:"usuario_id",
+        as: "correo"
+    }
+})
+/*************************************************************/
+   
+   
+   

@@ -1,0 +1,131 @@
+
+
+// MUESTRA BASES
+show dbs;
+
+// SELECCIONAR BASE DE DATOS
+use nameDb
+
+// CREA BASES DE DATOS
+use newdatabase
+
+// CREAR COLECCIONES 
+db.createCollection("users")
+
+/************* INSERT ****************************/
+
+db.users.insertOne(
+    {
+    name: "sue",
+    age: 26,
+    status: pendind
+    }
+)
+
+// varios regitros
+db.publicaciones.insertMany([
+    {
+        "titulo":"Cusro Python",
+        "furacion":230},
+        {"titluo":"Curso Java"}
+    ])
+
+// crea registros de una tabla espesifica
+db.createUser(
+{
+    user: "curso",
+    pwd: "mongodb",
+    roles: [ "root" ]
+})
+
+db.namecollections.insert(
+    [
+    {
+        "titulo":"Cusro Python",
+        "furacion":230},
+        {"titluo":"Curso Java"}
+    ]
+)
+
+// crear colecciones con el nombre directamente 
+db.createCollection({"autor", {capped:true, size:50000, max:100000}})
+
+/************ SELECT ****************************/
+
+// todos los registro
+db.publicaciones.find()
+
+db.usuarios.find({
+    $and:[{edad:28}, {nombre:"Camilo"} 
+]})
+
+
+// SELECT CON FILTROS
+db.usuarios.find({nombre:"Camilo"}) // similar a where
+db.usuarios.find({nombre:"Camilo",edad:28}) 
+db.usuarios.find({edad:{$eq:28}}) // where edad = 28
+db.usuarios.find({edad:{$ne:28}}) // where edad <> 28
+db.usuarios.find(edad:{$exists:true}) //where edad is not null
+db.usuarios.find($or:[{nombre:"Camilo"},{nombre:"Camilo2"}]) // where nombre = "Camilo" OR nombre = "Camilo2"
+db.usuarios.find($and:[{edad:38},{nombre:"Camilo2"}]) // where edad = 28 OR nombre = "Camilo2"
+
+db.curso.find({}).limit(2).skip(2)
+
+
+/*
+$eq: Igual que.
+$ne: Distinto de.
+$gt: valoresmayores que.
+$gte: Valoresmayores o iguales que.
+$lt: Valores menores que.
+$lte: Valeres menores o iguales que.
+$in: Valores que se encuetren en un array de elementos.
+$nin: Obtiene valores que NO se encuentran en arra de elementos.
+*/
+
+/*****************************************************
+/***************** UPDATE ******************************/
+
+db.curso.save(
+    {_id:ObjectId("2435234534asdfsd"), 
+    Detalle:"MongoDB",fecha:new Date("2018-02-11")}
+    )
+    db.usuarios.updateOne(
+    { _id:ObjectId("65615ee8d4349bb9a31221ed")},
+    { $set:{email:"nuevoemail@email.com","nombre":"Daniel" }}
+)
+
+db.usuarios.updateOne(
+    { emial:"ca@emial.com"},
+    { $set:{email:"nuevoemail@email.com","nombre":"Daniel" }}
+)
+
+/*********************************************************/
+/**************** ELIMINA REGISTROS ***********************/
+
+// eliminar base de datos
+db.dropDatabase();
+
+db.usuarios.deleteOne(
+    { emial:"ca@emial.com"},
+    { $set:{email:"nuevoemail@email.com","nombre":"Daniel" }}
+)
+
+db.usuarios.deleteOne({ _id:ObjectId("65615ee8d4349bb9a31221ed")})
+
+db.usuarios.deleteOne(
+    { _id:ObjectId("65615ee8d4349bb9a31221ed")},
+    { $set:{email:"nuevoemail@email.com","nombre":"Daniel" }}
+)
+
+/*********************************************************/
+/*********** CONSULTAS DE SQL A MQL ************************/
+// de sql a mql
+mb.runSQLQuery(
+    'select * from usuarios where edad = 1'
+    ).sort({_id:-1}).limit(100)
+/******************************************************/
+
+
+
+

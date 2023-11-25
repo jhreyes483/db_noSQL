@@ -1,0 +1,12 @@
+instalador
+https://www.mongodb.com/try/download/community
+
+
+gestores graficos
+
+robomongo
+https://studio3t.com/download/
+
+
+nosqlbooster  este genera la convercion desde sql a mongo
+https://nosqlbooster.com/
