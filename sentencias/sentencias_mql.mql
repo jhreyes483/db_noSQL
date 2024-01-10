@@ -125,7 +125,13 @@ mb.runSQLQuery(
     'select * from usuarios where edad = 1'
     ).sort({_id:-1}).limit(100)
 /******************************************************/
-
+/************* DB-STOCKAGO***************************/
+ use "stockago-mongodb"
+  db.time_logs.find(
+      {file: {$ne:"App\\Http\\Controllers\\Backend\\MainController"}}
+     /* {file:"MainController"} */
+  ).sort({time:-1})
+/******************************************************/
 
 
 
